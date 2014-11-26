@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Runtime.CompilerServices;
 
 namespace EF6
 {
@@ -14,8 +17,16 @@ namespace EF6
 
         public int PatientId { get; set; }
         public string First { get; set; }
+        [Required]
+        [MaxLength(50)]
         public string Last { get; set; }
-        public DateTime BirthDate { get; set; }
+        [NotMapped]
+        public string FullName
+        {
+            get { return string.Format("{0}, {1} -- {2}", First, Last, PatientType); }
+        }
+        public DateTime? BirthDate { get; set; }
+        public PatientType PatientType { get; set; }
 
         public virtual ICollection<Address> Addresses
         {
@@ -23,6 +34,8 @@ namespace EF6
             set { addresses = value; }
         }
     }
+
+    public enum PatientType { Student, Employee, Other}
 
     public class Address
     {

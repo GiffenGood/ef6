@@ -1,4 +1,5 @@
 ﻿using System.Data.Entity;
+using System.Diagnostics;
 using EF6;
 
 namespace EF6DAL
