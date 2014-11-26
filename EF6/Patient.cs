@@ -2,11 +2,10 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Runtime.CompilerServices;
 
 namespace EF6
 {
-    public class Patient
+    public class Patient : EntityBase
     {
         private ICollection<Address> addresses;
 
@@ -27,33 +26,12 @@ namespace EF6
         }
         public DateTime? BirthDate { get; set; }
         public PatientType PatientType { get; set; }
+        public string Note { get; set; }
 
         public virtual ICollection<Address> Addresses
         {
             get { return addresses; }
             set { addresses = value; }
         }
-    }
-
-    public enum PatientType { Student, Employee, Other}
-
-    public class Address
-    {
-        public int AddressId { get; set; }
-        public string Street1 { get; set; }
-        public string Street2 { get; set; }
-        public string City { get; set; }
-        public string State { get; set; }
-        public string Zip { get; set; }
-        public AddressType AddressType { get; set; }
-        public int PatientId { get; set; }
-        public virtual Patient Patient { get; set; }
-    }
-
-    public enum AddressType
-    {
-        Home,
-        Work,
-        Vacation
     }
 }
